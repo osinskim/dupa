@@ -1,0 +1,14 @@
+<div class="main-page">
+    <div class="panel">
+        <p></p>
+    </div>
+    <app-infinite-scroll class="panel" (scrolled)="onScroll()">
+        <app-add-post></app-add-post>
+        <ng-container *ngFor="let post of posts">
+            <app-post-view [post]="post"></app-post-view>
+        </ng-container>
+    </app-infinite-scroll>
+    <div class="panel">
+        <p></p>
+    </div>
+</div>

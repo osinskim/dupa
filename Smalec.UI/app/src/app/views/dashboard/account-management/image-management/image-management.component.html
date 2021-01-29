@@ -1,0 +1,22 @@
+<div>
+    <app-view-card [title]="'Zmień zdjecie profilowe'" [description]="'Tutaj możesz zmienić swoje zdjęcie profilowe'">
+        <div class="section--manage">
+            <div class="section--photo">
+                <img [attr.src]="photoSrc | secure | async">
+            </div>
+            <app-add-photo (imageLoaded)="fileChangeEvent($event)"></app-add-photo>
+        </div>
+    </app-view-card>
+</div>
+
+<app-modal [title]="'Dodaj nowe zdjecie'" [isModalVisible]="isNewPhotoUploadModal">
+    <div class="modal--image">
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [roundCropper]="true" format="png"
+            (imageCropped)="imageCropped($event)"> 
+        </image-cropper>
+    </div>
+    <div class="modal--buttons">
+        <app-button [text]="'Anuluj'" [filled]="false" (click)="closeModal()"></app-button>
+        <app-button [text]="'Zapisz'" (click)="saveProfilePhoto()"></app-button>
+    </div>
+</app-modal>

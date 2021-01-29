@@ -1,0 +1,7 @@
+<input placeholder="szukaj..." [(ngModel)]="keywords" />
+<button (click)="onSearchClick()">szukaj</button>
+<div *ngFor="let profile of foundProfiles">
+    <img style="width: 50px;" [attr.src]="profile.profilePhoto | secure | async">
+    <span>{{profile.name}}</span>
+    <button *ngIf="!profile.isFriend" (click)="onAddFriendClick(profile.id)">dodaj frienda</button>
+</div>

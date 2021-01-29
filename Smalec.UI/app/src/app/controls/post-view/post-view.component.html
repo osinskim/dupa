@@ -1,0 +1,52 @@
+<div class="post">
+    <div *ngIf="postOwner" class="user">
+        <app-author [userImage]="postOwner.profilePhoto" [userName]="postOwner.name" [date]="_post.createdDate">
+        </app-author>
+    </div>
+    <div class="post--content">
+        <p *ngIf="_post.description" class="post--content-text">{{ _post.description }}</p>
+        <div style="text-align: center; height: 100%;" *ngIf="_post.mediaURL">
+            <img class="post--content-img" [attr.src]="_post.mediaURL | secure | async">
+        </div>
+        <div class="post--interactions">
+            <div>
+                <i class="material-icons icon" appTooltip tooltipTitle="Lubię to!"
+                    (click)="addReaction(reactionType.Like, _post.uuid, reactedObjectType.Post)">thumb_up</i>
+                <span>{{ likesAmount }}</span>
+                <i class="material-icons icon" appTooltip tooltipTitle="Fuck you!"
+                    (click)="addReaction(reactionType.FuckJu, _post.uuid, reactedObjectType.Post)">thumb_down</i>
+                <span>{{ fuckJuAmount }}</span>
+            </div>
+            <div>
+                <i class="material-icons icon" appTooltip tooltipTitle="Dodaj komentarz"
+                    (click)="commentsVisible = !commentsVisible">message</i>
+                <span>{{ _post.comments ? _post.comments.length : 0 }}</span>
+                <i class="material-icons icon" appTooltip tooltipTitle="Udostępnij">reply</i>
+                <span>69</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="commentsVisible" [@slideInOut] class="comment">
+    <div *ngFor="let comment of _post.comments" class="comment--content">
+        <app-author [userName]="findUserData(comment.userUuid).name"
+            [userImage]="findUserData(comment.userUuid).profilePhoto" [date]="comment.createdDate"
+            [size]="AuthorSize.Small"></app-author>
+        <div class="comment--text">
+            {{ comment.text }}
+        </div>
+        <div class="comment--reactions">
+            <i class="material-icons icon" appTooltip tooltipTitle="Lubię to!"
+                (click)="addReaction(reactionType.Like, _post.uuid, reactedObjectType.Post)">thumb_up</i>
+            <span>{{ likesAmount }}</span>
+            <i class="material-icons icon" appTooltip tooltipTitle="Fuck you!"
+                (click)="addReaction(reactionType.FuckJu, _post.uuid, reactedObjectType.Post)">thumb_down</i>
+            <span>{{ fuckJuAmount }}</span>
+        </div>
+    </div>
+    <div style="margin-top: 15px;">
+        <app-input [(data)]="commentText" [placeholder]="'Dodaj komentarz'" (enterClicked)="addComment()">
+        </app-input>
+    </div>
+</div>

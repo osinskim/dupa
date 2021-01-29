@@ -1,0 +1,86 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import 'colors.scss';
+
+* {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    // color: $text-color;
+}
+
+body {
+    background-color: #546fb234;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+}
+
+.clickable {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.icon {
+    color: $base-color-lighter;
+
+    &:hover {
+        color: $base-color;
+        cursor: pointer;
+    }
+
+    &:active {
+        color: $base-color-darker;
+    }
+}
+
+.tooltip {
+    position: absolute;
+    max-width: 150px;
+    font-size: 14px;
+    text-align: center;
+    color: #f8f8f2;
+    padding: 3px 8px;
+    background: $base-color-darker;
+    border-radius: 4px;
+    z-index: 1000;
+    opacity: 0;
+}
+
+.tooltip:after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+}
+
+.tooltip-top:after {
+    top: 100%;
+    left: 10%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-color: $base-color-darker transparent transparent transparent;
+}
+
+.tooltip-show {
+    opacity: 1;
+}
+
+
+.user-img,
+.user-img--small {
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.user-img {
+    width: 50px;
+    height: 50px;
+}
+
+.user-img--small {
+    width: 40px;
+    height: 40px;
+}

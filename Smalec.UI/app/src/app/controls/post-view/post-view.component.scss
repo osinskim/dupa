@@ -1,0 +1,90 @@
+@import "colors.scss";
+
+@mixin reaction-desc {
+    display: flex;
+    align-items: center;
+
+    span {
+        font-size: 14px;
+        margin: 0 15px 0 5px;
+        color: $text-grey;
+    }
+}
+
+.user {
+    padding: 0 25px;
+}
+
+.post {
+    padding: 20px 0;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid lightgray;
+    position: relative;
+    margin: 12px 3px;
+
+    &--interactions {
+        padding: 0 25px;
+        border-top: 1px solid rgb(221, 221, 221);
+        display: flex;
+        justify-content: space-between;
+        padding-top: 20px;
+
+        div {
+            @include reaction-desc();
+        }
+    }
+
+    &--content {
+        &-text {
+            padding: 0 25px;
+            margin: 20px 0 0 0;
+            word-break: break-word;
+            color: $text-grey;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        &-img {
+            margin: 5px 0;
+            // max-height: 600px;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            margin-top: 20px;
+        }
+    }
+
+    textarea {
+        outline: none;
+        resize: none;
+        border: 1px solid #546fb2;
+        background-color: #fafafa;
+        border-radius: 5px;
+        height: 70px;
+        margin: 0 10px;
+    }
+}
+
+.comment {
+    background-color: #f5f5f5;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    margin: -12px 3px 12px 3px;
+    padding: 10px 20px;
+
+    &--content {
+        border-bottom: 1px solid rgb(221, 221, 221);
+        padding: 10px 5px;
+    }
+
+    &--text {
+        word-break: break-word;
+        padding: 15px 0;
+    }
+
+    &--reactions {
+        display: flex;
+        margin: 10px 0;
+        @include reaction-desc();
+    }
+}

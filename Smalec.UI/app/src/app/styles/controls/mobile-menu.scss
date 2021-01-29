@@ -1,0 +1,63 @@
+@import 'colors.scss';
+
+.mobile-menu {
+    display: block;
+    position: absolute;
+    z-index: 100;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    top: 4.5em;
+    right: 0;
+
+    &--serparator {
+        color: $base-color-lighter;
+        border-bottom: 1px solid #e6ecf5;
+        padding: 0.5em 1em;
+    }
+
+    &--entry {
+        border-bottom: 1px solid #e6ecf5;
+        display: flex;
+        align-items: center;
+        padding: 0.4em 1em;
+
+        i {
+            color: $text-grey;
+        }
+
+        p {
+            padding: 18px 23px 18px 10px;
+            color: $text-grey;
+            font-size: 0.85em;
+            display: inline-block;
+
+            &:hover {
+                color: $base-color;
+            }
+        }
+
+        &:hover {
+            color: $base-color;
+            cursor: pointer;
+
+            i {
+                color: $base-color;
+            }
+        }
+    }
+
+    &--entry:last-child {
+        border-bottom: 0;
+    }
+}
+
+@media (max-width: 991px) {
+    .mobile-menu {
+        width: 100%;
+        height: calc(100% - 4.5em);
+
+        &--entry:last-child {
+            border-bottom: 1px solid #e6ecf5;
+        }
+    }
+}

@@ -1,0 +1,8 @@
+- error handling
+- poprawić sqle
+- cała reszta xd
+- sprawdzić ip przypisane do refresh tokenu
+- czyścić store na froncie po wylogowywaniu
+- wywalić subscribe z akcji w storze
+- zrobić tak żeby w poście nie przechowywać danych wszystkich użytkowników
+- wszystkie menu na froncie uogólnić style wpierdolić do jednego cssa

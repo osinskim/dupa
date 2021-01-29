@@ -1,0 +1,191 @@
+@import "colors.scss";
+
+.topbar {
+    .top-bar {
+        margin: 0;
+        display: grid;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $base-color;
+        color: white;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        height: 4.5em;
+
+        &--logo,
+        &--menu {
+            background-color: $base-color-darkest;
+            max-width: 4.5em;
+            height: 100%;
+
+            img {
+                display: block;
+                margin: 0 auto;
+                width: 60%;
+                border-radius: 50%;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+            }
+        }
+
+        &--logo:hover,
+        &--menu:hover {
+            cursor: pointer;
+        }
+
+        &--search {
+            height: 100%;
+            width: 30vw;
+        }
+
+        &--title {
+            color: white;
+            font-size: 1em;
+            font-weight: 700;
+            margin-left: 2em;
+        }
+
+        @media (max-width: 991px) {
+            &--title {
+                margin-left: 0;
+                text-align: center;
+            }
+        }
+
+        &--notification {
+            margin: 0 20px;
+            width: 30px;
+        }
+
+        &--add-post {
+            display: flex;
+            align-items: center;
+            margin-right: 40px;
+
+            img {
+                width: 16px;
+            }
+
+            span {
+                font-weight: 800;
+                color: white;
+                font-size: 1.2em;
+                margin: 0 5px;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        &--user {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            height: 100%;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &-name {
+                font-size: 14px;
+                font-weight: 500;
+                margin: 0 2px 0 8px;
+                max-width: 120px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            &-image {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+            }
+
+            &-arrow {
+                width: 20px;
+            }
+
+            &:hover {
+                .top-bar--user-options {
+                    display: block;
+                }
+            }
+
+            &-options {
+                display: none;
+                position: absolute;
+                min-width: 160px;
+                z-index: 100;
+                background-color: #fff;
+                border-radius: 1px;
+                box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+                top: calc(4.5em - 10px);
+
+                &-serparator {
+                    color: $base-color-lighter;
+                    border-bottom: 1px solid #e6ecf5;
+                    padding: 0.5em 1em;
+                }
+
+                &-entry {
+                    border-bottom: 1px solid #e6ecf5;
+                    display: flex;
+                    align-items: center;
+                    padding: 0.4em 1em;
+
+                    i {
+                        color: $text-grey;
+                    }
+
+                    p {
+                        padding: 18px 23px 18px 10px;
+                        color: $text-grey;
+                        font-size: 0.85em;
+                        display: inline-block;
+    
+                        &:hover {
+                            color: $base-color;
+                        }
+                    }
+
+                    &:hover {
+                        color: $base-color;
+
+                        i {
+                            color: $base-color;
+                        }
+                    }
+                }
+
+                &-entry:last-child {
+                    border-bottom: 0;
+                }
+            }
+        }
+
+        &--menu {
+            img {
+                box-shadow: none !important;
+            }
+        }
+    }
+}
+
+//mobile
+@media (max-width: 991px) {
+    .top-bar {
+        grid-template-columns: 4.5em 1fr 4.5em;
+    }
+}
+
+//desktop
+@media (min-width: 992px) {
+    .top-bar {
+        grid-template-columns: 4.5em 15em 2fr 2fr auto 4.5em;
+    }
+}

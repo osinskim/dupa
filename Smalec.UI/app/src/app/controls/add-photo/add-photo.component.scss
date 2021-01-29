@@ -1,0 +1,39 @@
+@import 'colors.scss';
+
+.photo {
+    background-color: #bec8e2;
+    text-align: center;
+    border-radius: 10px;
+    margin: 10px 0;
+
+    &--normal {
+        padding: 10px;
+        width: 150px;
+    }
+
+    &--small {
+        font-size: 12px;
+        padding: 3px;
+        display: flex;
+        width: 140px;
+        align-items: center;
+
+        img {
+            height: 20px;
+            margin: 5px;
+        }
+    }
+
+    p {
+        color: $base-color;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: #d0d7ea;
+    }
+
+    &:active {
+        background-color: #acb9da;
+    }
+}

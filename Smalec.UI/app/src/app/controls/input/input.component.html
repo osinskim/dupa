@@ -1,0 +1,4 @@
+<div>
+    <input type="text" placeholder="{{placeholder}}" [(ngModel)]="data" (ngModelChange)="onDataChanged($event)"
+        (keyup.enter)="enterClicked.emit()">
+</div>

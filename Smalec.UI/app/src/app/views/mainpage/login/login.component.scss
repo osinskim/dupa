@@ -1,0 +1,23 @@
+@import "colors.scss";
+
+form {
+    margin: 3em;
+
+    ::ng-deep app-button {
+        margin-top: 1em;
+        display: inherit;
+
+        div {
+            margin: 0 auto;
+        }
+    }
+}
+
+span,
+a {
+    display: block;
+}
+
+.logo {
+    max-width: 140px;
+}

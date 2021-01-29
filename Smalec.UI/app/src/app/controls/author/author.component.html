@@ -1,0 +1,9 @@
+<div class="author">
+    <img class="author--img author--img-normal"
+        [ngClass]="{'author--img-normal': size === AuthorSize.Normal, 'author--img-small': size === AuthorSize.Small }"
+        [attr.src]="userImage | secure | async">
+    <div>
+        <p class="author--name">{{ userName }}</p>
+        <p class="author--date">{{ date | date:'HH:mm, dd-MM-yyyy'}}</p>
+    </div>
+</div>

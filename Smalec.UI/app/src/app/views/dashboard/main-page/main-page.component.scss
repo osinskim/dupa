@@ -1,0 +1,21 @@
+.main-page {
+    height: calc(100vh - 4.5em);
+    display: grid;
+    grid-template-columns: 2fr 3fr 2fr;
+    overflow-y: scroll;
+
+    ::ng-deep app-infinite-scroll {
+        padding-bottom: 10em;
+    }
+}
+
+@media (max-width: 620px) {
+    .main-page {
+        grid-template-columns: 1fr;
+        padding: 0 1em;
+    }
+    .panel:first-child,
+    .panel:last-child {
+        display: none;
+    }
+}

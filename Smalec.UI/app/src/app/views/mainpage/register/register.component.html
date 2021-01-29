@@ -1,0 +1,25 @@
+<div style="height: 100%; position: relative;display: flex;
+flex-direction: column;
+justify-content: space-evenly;">
+    <div>
+        <img class="logo" src="assets/login-logo.png" />
+        <h2>Create nowe account TERAZ!</h2>
+    </div>
+    <form [formGroup]="userRegisterForm" (ngSubmit)="onSignUp()" class="login--box">
+        <ng-container *ngFor="let errorMessage of errorMessages">
+            <span class="errorMessage" translate>{{ errorMessage }}</span>
+        </ng-container>
+        <input type="text" placeholder="Email address" formControlName="email" required
+            [className]="userRegisterForm.get('email').valid ? 'input--valid' : 'input--invalid'">
+        <input type="password" placeholder="Password" formControlName="password" required
+            [className]="userRegisterForm.get('password').valid ? 'input--valid' : 'input--invalid'">
+        <input type="text" placeholder="Name" formControlName="name" required
+            [className]="userRegisterForm.get('name').valid ? 'input--valid' : 'input--invalid'">
+        <app-button type="submit" (click)="onSignUp()" [disabled]="!userRegisterForm.valid" [text]="'Sign up'">
+        </app-button>
+    </form>
+    <div class="new-account">
+        <span>Masz już konto?</span>
+        <a routerLink="/mainpage/login" routerLinkActive="active" > Zaloguj się!</a>
+    </div>
+</div>

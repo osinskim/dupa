@@ -1,0 +1,32 @@
+<div class="left-menu" [ngClass]="[menuExpanded ? 'expanded-left-menu' : 'collapsed-left-menu']" id="leftMenu">
+    <div class="left-menu--list menu">
+        <div *ngIf="menuExpanded" class="menu--group-title">
+            <h5>Pages</h5>
+        </div>
+        <div *ngFor="let item of componentsTitles" class="left-menu--item menu--entry" routerLink="{{ item.link }}"
+            [ngClass]="{'left-menu--item-selected': title === item.name}" (click)="collapseMenu()">
+            <i class="material-icons icon">{{item.icon}}</i>
+            <p *ngIf="menuExpanded">{{item.name}}</p>
+        </div>
+        <div class="left-menu--expand-button" id="expandButton">
+            <i class="material-icons icon" #expandButtonIcon
+            hideOnOutsideClick [skippableTargets]='["leftMenu"]'
+            [additionalTargets]='["expandButton"]'
+            (clickInside)="toggleMenu()" (clickOutside)="collapseMenu()"
+            >{{ menuExpanded ? 'chevron_left' : 'chevron_right' }}</i>
+        </div>
+    </div>
+</div>
+<div *ngIf="showMobileMenu && (isSmartphoneScreen$ | async)" class="mobile-menu">
+    <div class="mobile-menu--serparator">
+        <h6>Pages</h6>
+    </div>
+    <div
+        *ngFor="let item of componentsTitles"
+        class="mobile-menu--entry"
+        routerLink="{{ item.link }}"
+        (click)="onMobileEntryClick()">
+        <i class="material-icons icon">{{item.icon}}</i>
+        <p>{{ item.name }}</p>
+    </div>
+</div>

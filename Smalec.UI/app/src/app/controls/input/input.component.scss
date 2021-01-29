@@ -1,0 +1,19 @@
+@import 'colors.scss';
+
+input {
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 1.1em;
+    border-bottom: 1px solid $base-color;
+    outline: none;
+    width: 100%;
+}
+
+.input--valid {
+    border-bottom: 1px solid $base-color;
+}
+
+.input--invalid {
+    border-bottom: 1px solid red;
+}

@@ -1,0 +1,18 @@
+@import 'colors.scss';
+
+.section {
+    margin-bottom: 15px;
+    padding: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+    &--title {
+        color: #0d1738;
+        margin-bottom: 10px;
+    }
+
+
+}

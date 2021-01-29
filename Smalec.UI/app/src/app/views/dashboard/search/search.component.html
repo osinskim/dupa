@@ -1,0 +1,20 @@
+<div class="search" (click)="onSearchInputClick()" id="searchContainer">
+    <input placeholder="Search something..." [(ngModel)]="searchKeywords" #searchInput id="searchInput">
+    <img src="../../../assets/search.png" id="searchButton">
+</div>
+<div class="result" #searchResult hideOnOutsideClick
+        [skippableTargets]="['searchContainer', 'searchInput', 'searchButton']"
+        (clickInside)="showResultContainer()" (clickOutside)="hideResultContainer()">
+    <div class="result--progress-indicator" *ngIf="isSearchLoading">
+        <app-loader-indicator></app-loader-indicator>
+    </div>
+    <div *ngIf="!isSearchLoading" class="search-result">
+        <div class="search-result--group-title">
+            <h6>People</h6>
+        </div>
+        <div class="search-result--entry" *ngFor="let user of searchResultData">
+            <img [attr.src]="user.profilePhoto | secure | async">
+            <p>{{user.name}}</p>
+        </div>
+    </div>
+</div>

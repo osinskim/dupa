@@ -1,0 +1,229 @@
+version: "3.5"
+
+services:
+  gateway:
+    image: gateway
+    build:
+      context: .
+      dockerfile: Smalec.Api/Dockerfile
+    restart: always
+    ports:
+      - 42270:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    depends_on:
+      - redis
+    networks:
+      - default_network
+
+  usermanagement:
+    image: usermanagement
+    build:
+      context: .
+      dockerfile: Smalec.Service.UserManagement/Dockerfile
+    restart: always
+    environment:
+      - ServiceConfig__serviceDiscoveryAddress=http://consul:8500
+      - ServiceConfig__serviceAddress=http://usermanagement:80
+      - ServiceConfig__serviceName=usermanagement
+      - ServiceConfig__serviceId=usermanagement-v1
+    ports:
+      - "80"
+    depends_on:
+      - "gateway"
+      - "rabbitmq"
+      - "consul"
+      - "db_userManagement"
+    networks:
+      - default_network
+
+  posts:
+    image: posts
+    build:
+      context: .
+      dockerfile: Smalec.Service.Posts/Dockerfile
+    restart: always
+    environment:
+      - ServiceConfig__serviceDiscoveryAddress=http://consul:8500
+      - ServiceConfig__serviceAddress=http://posts:80
+      - ServiceConfig__serviceName=posts
+      - ServiceConfig__serviceId=posts-v1
+    ports:
+      - "80"
+    depends_on:
+      - "gateway"
+      - "rabbitmq"
+      - "consul"
+      - "db_posts"
+    networks:
+      - default_network
+
+  friendship:
+    image: friendship
+    build:
+      context: .
+      dockerfile: Smalec.Service.Friendship/Dockerfile
+    restart: always
+    environment:
+      - ServiceConfig__serviceDiscoveryAddress=http://consul:8500
+      - ServiceConfig__serviceAddress=http://friendship:80
+      - ServiceConfig__serviceName=friendship
+      - ServiceConfig__serviceId=friendship-v1
+    ports:
+      - "80"
+    depends_on:
+      - "gateway"
+      - "rabbitmq"
+      - "consul"
+      - "db_friendships"
+    networks:
+      - default_network
+
+  socialfacade:
+    image: socialfacade
+    build:
+      context: .
+      dockerfile: Smalec.ServiceFacade.Social/Dockerfile
+    restart: always
+    environment:
+      - ServiceConfig__serviceDiscoveryAddress=http://consul:8500
+      - ServiceConfig__serviceAddress=http://socialfacade:80
+      - ServiceConfig__serviceName=socialfacade
+      - ServiceConfig__serviceId=socialfacade-v1
+    ports:
+      - "80"
+    depends_on:
+      - "consul"
+      - "posts"
+      - "usermanagement"
+    networks:
+      - default_network
+
+  filestorage:
+    image: filestorage
+    build:
+      context: .
+      dockerfile: Smalec.Service.StaticFileStorage/Dockerfile
+    restart: always
+    environment:
+      - ServiceConfig__serviceDiscoveryAddress=http://consul:8500
+      - ServiceConfig__serviceAddress=http://filestorage:80
+      - ServiceConfig__serviceName=filestorage
+      - ServiceConfig__serviceId=filestorage-v1
+    ports:
+      - "80"
+    depends_on:
+      - "rabbitmq"
+    networks:
+      - default_network
+    volumes:
+      - file_strg:/var
+
+  smalec_ui:
+    image: smalec_ui
+    build:
+      context: Smalec.UI/app
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - "4200:80"
+
+  rabbitmq: # login guest:guest
+    image: rabbitmq:3-management
+    hostname: "rabbitmq"
+    labels:
+      NAME: "rabbitmq"
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "25672:25672"
+      - "15671:15671"
+      - "15672:15672"
+    networks:
+      - default_network
+
+  db_userManagement:
+    image: microsoft/mssql-server-linux:latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Admin123#@=
+    command: /bin/bash /setupScripts/Setup/entrypoint.sh
+    restart: always
+    ports:
+      - "1433"
+    networks:
+      - default_network
+    volumes:
+      - type: volume
+        source: ./db_usr
+        target: /var/opt/mssql/data
+      - type: bind
+        source: ./Smalec.Service.UserManagement/SQL
+        target: /setupScripts
+
+  db_posts:
+    image: microsoft/mssql-server-linux:latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Admin123#@=
+    command: /bin/bash /setupScripts/Setup/entrypoint.sh
+    restart: always
+    ports:
+      - "1433"
+    networks:
+      - default_network
+    volumes:
+      - type: volume
+        source: ./db_posts
+        target: /var/opt/mssql/data
+      - type: bind
+        source: ./Smalec.Service.Posts/SQL
+        target: /setupScripts
+
+  db_friendships:
+    image: neo4j:latest
+    restart: unless-stopped
+    environment:
+      - NEO4J_AUTH=neo4j/dupasraka123Q!
+    networks:
+      - default_network
+    ports:
+      - 7474:7474
+      - 7687:7687
+
+  redis:
+    image: "redis:alpine"
+    command: redis-server
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - $PWD/redis-data:/var/lib/redis
+      - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    networks:
+      - default_network
+
+  consul:
+    image: consul:latest
+    command: consul agent -dev -log-level=warn -ui -client=0.0.0.0
+    hostname: consul
+    container_name: consul
+    ports:
+      - "8500:8500"
+    networks:
+      - default_network
+
+volumes:
+  db_usr:
+  db_posts:
+  file_strg:
+
+networks:
+  default_network:
+    name: default_network

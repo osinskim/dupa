@@ -1,0 +1,8 @@
+<div class="photo" [ngClass]="{'photo--normal': size === 'normal', 'photo--small': size === 'small'}" (click)="clickUpload()">
+    <img src="assets/camera.png">
+    <p>Dodaj nowe zdjęcie</p>
+
+    <div>
+        <input id="input" type="file" (change)="uploadFile($event)" style="display:none;">
+    </div>
+</div>

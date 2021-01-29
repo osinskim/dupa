@@ -1,0 +1,18 @@
+<div class="container">
+    <img [attr.src]="photoSrc | secure | async" class="user-img--small">
+    <p (click)="openModal()">Wpisz coś tutaj fajnego ...</p>
+</div>
+
+<ng-container *ngIf="isAddPostModal">
+    <app-modal [isModalVisible]="isAddPostModal" [title]="'Dodaj nowy post'">
+        <div class="modal--content">
+            <app-add-photo [size]="'small'" (imageLoaded)="onImageLoaded($event)"></app-add-photo>
+            <textarea autofocus id="postTextarea" [(ngModel)]="modalData.text" wrap="hard" cols="60"
+                placeholder="Wpisz tu co"></textarea>
+        </div>
+        <div class="modal--buttons">
+            <app-button (click)="closeModal()" [text]="'Anuluj'" [filled]="false"></app-button>
+            <app-button (click)="addNewPost()" [text]="'Dodaj'"></app-button>
+        </div>
+    </app-modal>
+</ng-container>

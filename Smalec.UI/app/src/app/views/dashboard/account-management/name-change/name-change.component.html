@@ -1,0 +1,8 @@
+<div>
+    <app-view-card [title]="'Zmień nazwę użytkownika'" [description]="'Tutaj możesz zmienić swoją nazwę użytkownika'">
+        <div style="display: flex; margin: 30px;">
+            <app-input style="margin-right: 20px" [data]="userData.name" (dataChanged)="onUserNameChange($event)"></app-input>
+            <app-button [text]="'Zmień nazwę'" [width]="100" (click)="onChangeNameClick()"></app-button>
+        </div>
+    </app-view-card>
+</div>

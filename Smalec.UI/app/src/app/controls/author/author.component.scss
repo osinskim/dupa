@@ -1,0 +1,42 @@
+@import 'colors.scss';
+
+.author {
+    display: flex;
+    align-items: center;
+
+    &--name {
+        font-size: 0.875rem;
+        margin: 4px 10px;
+        color: $text-grey;
+        font-weight: 600;
+    }
+
+    &--name:hover {
+        color: $base-color;
+        cursor: pointer;
+    }
+
+    &--date {
+        color: $text-grey;
+        font-size: 0.812rem;
+        font-weight: 400;
+        margin: 0px 10px;
+    }
+
+    &--img {
+        margin-right: 5px;
+        border-radius: 50%;
+        border: 1px solid $border-color;
+
+        &-normal {
+            width: 40px;
+            height: 40px;
+        }
+    
+        &-small {
+            width: 25px;
+            height: 25px;
+        }
+    }
+}
+

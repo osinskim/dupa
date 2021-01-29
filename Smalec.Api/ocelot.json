@@ -1,0 +1,151 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/AddNewUser",
+      "DownstreamScheme": "http",
+      "ServiceName": "usermanagement",
+      "UpstreamScheme": "https",
+      "UpstreamPathTemplate": "/UserManagement/AddNewUser",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "usermanagement",
+      "UpstreamScheme": "https",
+      "UpstreamPathTemplate": "/UserManagement/{everything}",
+      "UpstreamHttpMethod": [
+        "POST",
+        "PUT",
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "friendship",
+      "UpstreamScheme": "https",
+      "UpstreamPathTemplate": "/Friendship/{everything}",
+      "UpstreamHttpMethod": [
+        "POST",
+        "PUT",
+        "GET",
+        "PATCH"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/AddPost",
+      "DownstreamScheme": "http",
+      "ServiceName": "posts",
+      "UpstreamScheme": "https",
+      "UpstreamPathTemplate": "/Posts/AddPost",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/GetMyPosts",
+      "DownstreamScheme": "http",
+      "ServiceName": "posts",
+      "UpstreamScheme": "https",
+      "UpstreamPathTemplate": "/Posts/GetMyPosts",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/GetMyRecentPost",
+      "DownstreamScheme": "http",
+      "ServiceName": "posts",
+      "UpstreamScheme": "https",
+      "UpstreamPathTemplate": "/Posts/GetMyRecentPost",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/{controller}/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "socialfacade",
+      "UpstreamScheme": "https",
+      "UpstreamPathTemplate": "/SocialFacade/{controller}/{everything}",
+      "UpstreamHttpMethod": [
+        "POST",
+        "PUT",
+        "GET",
+        "PATCH"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "filestorage",
+      "UpstreamScheme": "https",
+      "UpstreamPathTemplate": "/FileStorage/{everything}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Host": "consul",
+      "Port": 8500,
+      "Type": "Consul"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<div class="outer-container" *ngIf="!isSmallScreen; else mobileLayout">
+    <div class="middle-container">
+        <div class="inner-container">
+            <div class="form-photo-wrapper">
+                <div class="slide-bl">
+                </div>
+            </div>
+            <div class="form-wrapper">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #mobileLayout>
+    <div class="outer-container slide-bl">
+        <div class="middle-container">
+            <div class="inner-container">
+                <div class="form-wrapper">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

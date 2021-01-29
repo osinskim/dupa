@@ -1,0 +1,38 @@
+@import "colors.scss";
+
+.new-account {
+    bottom: 15px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+img {
+    border-radius: 50%;
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 3em;
+}
+
+h2 {
+    margin-top: 0.2em;
+    text-align: center;
+    color: $base-color;
+}
+
+form {
+    .errorMessage {
+        color: red;
+        font-size: 0.8em;
+        margin-right: auto;
+        margin-bottom: 5px;
+    }
+
+    input {
+        margin-bottom: 0.7em;
+    }
+}

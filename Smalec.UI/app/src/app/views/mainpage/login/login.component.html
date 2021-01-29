@@ -1,0 +1,16 @@
+<div style="height: 100%; position: relative;">
+    <img class="logo" src="assets/login-logo.png" />
+    <h2>Bonjour!</h2>
+    <form [formGroup]="userLoginForm" (ngSubmit)="onSignIn()">
+        <span class="errorMessage">{{ errorMessage }}</span>
+        <input type="text" placeholder="Email address" formControlName="email" required
+            [className]="userLoginForm.get('email').valid ? 'input--valid' : 'input--invalid'">
+        <input type="password" placeholder="Password" formControlName="password" required
+            [className]="userLoginForm.get('password').valid ? 'input--valid' : 'input--invalid'">
+        <app-button type="submit" (click)="onSignIn()" [disabled]="!userLoginForm.valid || isLoading" [text]="'Sign in'"></app-button>
+    </form>
+    <div class="new-account">
+        <span>Zapomniałeś hasła? a to spierdalaj...</span>
+        <a routerLink="/mainpage/register" routerLinkActive="active">Utwórz nowe konto</a>
+    </div>
+</div>

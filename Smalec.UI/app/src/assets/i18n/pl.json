@@ -1,0 +1,9 @@
+{
+    "USER_EXISTS" : "Użytkownik już istnieje",
+    "PASSWORD_SHOULD_HAVE_AT_LEAST_10_DIGITS" : "Hasło musi mieć conajmniej 10 znaczków",
+    "PASSWORD_SHOULD_HAVE_SPECIAL_CHAR" : "Hasło musi mieć conajmniej jeden znak specjalny",
+    "PASSWORD_SHOULD_HAVE_NUMBER" : "Hasło musi mieć conajmniej jedną cyfrę",
+    "PASSWORD_SHOULD_HAVE_UPPERCASE_CHAR" : "Hasło musi mieć conajmniej jedną dużą literę",
+    "PASSWORD_SHOULD_HAVE_LOWERCASE_CHAR" : "Hasło musi mieć conajmniej jedną małą literę",
+    "INCORRECT_EMAIL_FORMAT" : "Zły format adresu email"
+}

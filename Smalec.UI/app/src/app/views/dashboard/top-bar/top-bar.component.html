@@ -1,0 +1,54 @@
+<div class="topbar">
+    <div class="top-bar">
+        <ng-container *ngIf="!(isSmartphoneScreen$ | async); else smartphoneTopBar">
+            <div class="top-bar--logo" routerLink="/dashboard/mainpage">
+                <img src="../../../../assets/login-logo.png">
+            </div>
+            <span class="top-bar--title">{{title$ | async}}</span>
+            <app-search class="top-bar--search"></app-search>
+            <div class="tu bedo ikonki z powiedamieniomami">
+            </div>
+            <div class="top-bar--user">
+                <img class="top-bar--user-image" [attr.src]="photoSrc | secure | async">
+                <span class="top-bar--user-name">{{ name$ | async }}</span>
+                <img class="top-bar--user-arrow" src="assets/down-arrow.png">
+                <div class="top-bar--user-options">
+                    <div class="top-bar--user-options-serparator">
+                        <h6>Your Account</h6>
+                    </div>
+                    <div class="top-bar--user-options-entry">
+                        <i class="material-icons icon">settings</i>
+                        <p routerLink="/dashboard/accountsettings">Account Settings</p>
+                    </div>
+                    <div class="top-bar--user-options-entry">
+                        <i class="material-icons icon">settings</i>
+                        <p (click)="onSignOutClick()">Wyloguj się</p>
+                    </div>
+                </div>
+            </div>
+            <div></div>
+        </ng-container>
+    </div>
+</div>
+<ng-template #smartphoneTopBar>
+    <div class="top-bar--logo" (click)="onMobileLeftMenuVisibilityChanged()">
+        <img src="../../../../assets/login-logo.png">
+    </div>
+    <span class="top-bar--title">{{title$ | async}}</span>
+    <div class="top-bar--menu" (click)="onMobileMenuClick()">
+        <img src="../../../../assets/menu.png">
+        <div *ngIf="openMobileMenu" class="mobile-menu">
+            <div class="mobile-menu--serparator">
+                <h6>Your Account</h6>
+            </div>
+            <div class="mobile-menu--entry" routerLink="/dashboard/accountsettings">
+                <i class="material-icons icon">settings</i>
+                <p>Account Settings</p>
+            </div>
+            <div class="mobile-menu--entry" (click)="onSignOutClick()">
+                <i class="material-icons icon">exit_to_app</i>
+                <p>Wyloguj się</p>
+            </div>
+        </div>
+    </div>
+</ng-template>

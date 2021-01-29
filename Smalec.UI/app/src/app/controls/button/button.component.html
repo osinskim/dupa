@@ -1,0 +1,5 @@
+<div class="button" [ngStyle]="{'width.px': width}"
+    [ngClass]="{'button--disabled': disabled, 'button--not-filled': !filled}">
+    <img *ngIf="image" src="{{image}}">
+    <span>{{text}}</span>
+</div>
